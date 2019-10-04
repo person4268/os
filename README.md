@@ -5,4 +5,4 @@ Nothing more than a little toy os to learn about low level stuff. Partially base
 Run `make iso`. It will require gcc and nasm, and grub to compile.
 
 # Running
-Run `make qemu` to start qemu. If you want to wait for gdb to connect, use `make qemuwait`. To start gdb, type `make gdb`. It will automatically attach and set a breakpoint for the start of the kernel. 
+Run `make qemu` to start qemu. If you want to use gdb, use `make qemuwait`. Qemu will wait for gdb to connect to start executing. To start gdb, type `make gdb` in another terminal. It will automatically attach and set a breakpoint for the start of the kernel. 
