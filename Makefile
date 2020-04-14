@@ -23,8 +23,8 @@ KSOURCES=entry.o main.o framebuffer.o io.o string.o
 
 KERNELSOURCES=$(addprefix $(BUILDDIR), $(KSOURCES))
 
-all: kernel.elf iso
-.PHONY: iso kernel.elf qemu gdb qemuwait
+all: build/kernel.elf iso
+.PHONY: iso qemu gdb qemuwait
 
 qemu:
 	$(QEMU) $(QEMUARGS)
@@ -35,15 +35,17 @@ qemuwait:
 gdb:
 	$(GDB) $(GDBARGS)
 
-kernel.elf: $(KERNELSOURCES)
-	$(LD) $(LDFLAGS) $(KERNELSOURCES) -o $(BUILDDIR)kernel.elf
+clean:
+	rm build/*
 
+build/kernel.elf: $(KERNELSOURCES)
+	$(LD) $(LDFLAGS) $(KERNELSOURCES) -o $(BUILDDIR)kernel.elf
 
 iso:
 	cp build/kernel.elf iso/boot/kernel.elf
 	grub-mkrescue iso -o os.iso
 
-$(BUILDDIR)%.o: $(SRCDIR)/%.s
+$(BUILDDIR)%.o: $(SRCDIR)%.s
 	$(ASMC) $(ASMCFLAGS) $^ -o $@
 
 $(BUILDDIR)%.o: $(SRCDIR)%.c
