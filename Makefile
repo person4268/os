@@ -1,3 +1,4 @@
+#Temporary comment for test commit
 ASMC=nasm
 ASMCFLAGS=-f elf32 -g -F dwarf
 
